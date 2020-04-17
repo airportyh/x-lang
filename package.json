@@ -1,0 +1,16 @@
+{
+  "name": "x-lang",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "gen-parser": "nearleyc grammar.ne -o grammar.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "moo": "^0.5.1",
+    "nearley": "^2.19.2"
+  }
+}
