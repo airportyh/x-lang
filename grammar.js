@@ -7,18 +7,29 @@ const myLexer = require("./lexer");
 var grammar = {
     Lexer: myLexer,
     ParserRules: [
+    {"name": "program", "symbols": ["statements"], "postprocess": 
+        (data) => {
+            return {
+                type: "program",
+                body: data[0]
+            };
+        }
+                },
     {"name": "statements", "symbols": [], "postprocess": 
         () =>[]
                 },
-    {"name": "statements", "symbols": ["statement"], "postprocess": 
-        (data) => [data[0]]
+    {"name": "statements", "symbols": ["_", "statement", "_"], "postprocess": 
+        (data) => [data[1]]
                 },
-    {"name": "statements", "symbols": ["statement", {"literal":"\n"}, "statements"], "postprocess": 
-        (data) => [data[0], ...data[2]]
+    {"name": "statements$ebnf$1", "symbols": [{"literal":"\n"}]},
+    {"name": "statements$ebnf$1", "symbols": ["statements$ebnf$1", {"literal":"\n"}], "postprocess": function arrpush(d) {return d[0].concat([d[1]]);}},
+    {"name": "statements", "symbols": ["_", "statement", "_", "statements$ebnf$1", "statements"], "postprocess": 
+        (data) => [data[1], ...data[4]]
                 },
     {"name": "statement", "symbols": ["assignment"], "postprocess": id},
     {"name": "statement", "symbols": ["function_call"], "postprocess": id},
-    {"name": "assignment", "symbols": [(myLexer.has("identifier") ? {type: "identifier"} : identifier), "_", {"literal":"="}, "_", "literal"], "postprocess": 
+    {"name": "statement", "symbols": ["function_definition"], "postprocess": id},
+    {"name": "assignment", "symbols": [(myLexer.has("identifier") ? {type: "identifier"} : identifier), "_", {"literal":"="}, "_", "expression"], "postprocess": 
         (data) => {
             return {
                 type: "assignment",
@@ -32,7 +43,17 @@ var grammar = {
             return {
                 type: "function_call",
                 fun_name: data[0],
-                paramaters: data[4]
+                parameters: data[4]
+            }
+        }
+            },
+    {"name": "function_definition", "symbols": [(myLexer.has("identifier") ? {type: "identifier"} : identifier), "_", {"literal":"("}, "_", "parameter_list", "_", {"literal":")"}, "_", {"literal":"["}, "_", {"literal":"\n"}, "statements", {"literal":"\n"}, "_", {"literal":"]"}], "postprocess": 
+        (data) => {
+            return {
+                type: "function_definition",
+                fun_name: data[0],
+                parameters: data[4],
+                body: data[11]
             }
         }
             },
@@ -51,13 +72,14 @@ var grammar = {
                 },
     {"name": "expression", "symbols": [(myLexer.has("identifier") ? {type: "identifier"} : identifier)], "postprocess": id},
     {"name": "expression", "symbols": ["literal"], "postprocess": id},
+    {"name": "expression", "symbols": ["function_call"], "postprocess": id},
     {"name": "literal", "symbols": [(myLexer.has("number") ? {type: "number"} : number)], "postprocess": id},
     {"name": "literal", "symbols": [(myLexer.has("string") ? {type: "string"} : string)], "postprocess": id},
     {"name": "_", "symbols": []},
     {"name": "_", "symbols": ["__"]},
     {"name": "__", "symbols": [(myLexer.has("whitespace") ? {type: "whitespace"} : whitespace)]}
 ]
-  , ParserStart: "statements"
+  , ParserStart: "program"
 }
 if (typeof module !== 'undefined'&& typeof module.exports !== 'undefined') {
    module.exports = grammar;

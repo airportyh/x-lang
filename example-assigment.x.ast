@@ -1,0 +1,47 @@
+{
+  "type": "program",
+  "body": [
+    {
+      "type": "assignment",
+      "var_name": {
+        "type": "identifier",
+        "value": "n",
+        "text": "n",
+        "offset": 0,
+        "lineBreaks": 0,
+        "line": 1,
+        "col": 1
+      },
+      "value": {
+        "type": "number",
+        "value": 4,
+        "text": "4",
+        "offset": 4,
+        "lineBreaks": 0,
+        "line": 1,
+        "col": 5
+      }
+    },
+    {
+      "type": "assignment",
+      "var_name": {
+        "type": "identifier",
+        "value": "m",
+        "text": "m",
+        "offset": 6,
+        "lineBreaks": 0,
+        "line": 2,
+        "col": 1
+      },
+      "value": {
+        "type": "number",
+        "value": 5,
+        "text": "5",
+        "offset": 10,
+        "lineBreaks": 0,
+        "line": 2,
+        "col": 5
+      }
+    }
+  ]
+}
