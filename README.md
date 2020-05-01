@@ -18,3 +18,8 @@ The project depends on this libraries:
 
 * [Nearley JS](https://nearley.js.org/)
 * [Moo JS](https://github.com/no-context/moo)
+
+## Video Course
+
+Also see my course [How to Make a Programming Language](https://www.youtube.com/watch?v=5CS0CNVsn4I&list=PLSq9OFrD2Q3DasoOa54Vm9Mr8CATyTbLF) for more detailed coverage of the topics encountered in this series.
+
