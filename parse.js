@@ -17,6 +17,9 @@ async function main() {
     if (parser.results.length > 1) {
         console.warn("The parse tree generates multiple results.");
         console.log(parser.results);
+    } else if (parser.results.length === 0) {
+        console.error("Unexpected end of file");
+        process.exit(1);
     } else {
         const astFilename = path.basename(filename) + ".ast";
         const ast = parser.results[0];

@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chalk": "^4.0.0",
     "moo": "^0.5.1",
     "nearley": "^2.19.2"
   }

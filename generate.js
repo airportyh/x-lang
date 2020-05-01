@@ -41,6 +41,18 @@ function pow(n, m) {
 function sqrt(x) {
     return Math.sqrt(x);
 }
+
+function gt(x, y) {
+    return x > y;
+}
+
+function $if(cond, consequent, alternate) {
+    if (cond) {
+        consequent();
+    } else {
+        alternate();
+    }
+}
 `;
 
 async function main() {
@@ -66,7 +78,8 @@ function generate(node) {
         const value = generate(node.value);
         return `let ${varName} = ${value}`;
     } else if (node.type === "function_call") {
-        const funName = node.fun_name.value;
+        const sourceFunName = node.fun_name.value;
+        const funName = sourceFunName === "if" ? "$if" : sourceFunName;
         const params = node.parameters.map(generate)
             .join(", ");
         return `${funName}(${params})`;
@@ -80,9 +93,13 @@ function generate(node) {
         const funName = node.fun_name.value;
         const params = node.parameters.map(generate)
             .join(", ");
-        const body = node.body.map(generate).join(";\n") + ";";
+        const body = node.body.statements.map(generate).join(";\n") + ";";
         const indentedBody = body.split("\n").map(line => "\t" + line).join("\n");
         return `function ${funName} (${params}) {\n${indentedBody}\n}`;
+    } else if (node.type === "code_block") {
+        const body = node.statements.map(generate).join(";\n") + ";";
+        const indentedBody = body.split("\n").map(line => "\t" + line).join("\n");
+        return `function () {\n${indentedBody}\n}`;
     } else {
         throw new Error(`Unknown node type: ${node.type}`);
     }

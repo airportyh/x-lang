@@ -1,15 +1,9 @@
-function main () {
-	let x = add(1, 2, 3, 4, 5, 6, 7, 8, 9);
-	let y = mul(1, 2, 3);
-	print("Sum is:", x);
-	print("Product is:", y);
-	$if(gt(x, y), function () {
-		print("Sum is bigger than product");
-	}, function () {
-		print("Sum is less than product");
-	});
-};
-main();
+let n = 4;
+$if(gt(n, 7), function () {
+	print("It's too big");
+}, function () {
+	print("It's fine");
+});
 
 /*
 Runtime functions:

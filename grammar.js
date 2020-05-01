@@ -47,13 +47,21 @@ var grammar = {
             }
         }
             },
-    {"name": "function_definition", "symbols": [(myLexer.has("identifier") ? {type: "identifier"} : identifier), "_", {"literal":"("}, "_", "parameter_list", "_", {"literal":")"}, "_", {"literal":"["}, "_", {"literal":"\n"}, "statements", {"literal":"\n"}, "_", {"literal":"]"}], "postprocess": 
+    {"name": "function_definition", "symbols": [(myLexer.has("identifier") ? {type: "identifier"} : identifier), "_", {"literal":"("}, "_", "parameter_list", "_", {"literal":")"}, "_", "code_block"], "postprocess": 
         (data) => {
             return {
                 type: "function_definition",
                 fun_name: data[0],
                 parameters: data[4],
-                body: data[11]
+                body: data[8]
+            }
+        }
+            },
+    {"name": "code_block", "symbols": [{"literal":"["}, "_", {"literal":"\n"}, "statements", {"literal":"\n"}, "_", {"literal":"]"}], "postprocess": 
+        (data) => {
+            return {
+                type: "code_block",
+                statements: data[3]
             }
         }
             },
@@ -73,6 +81,7 @@ var grammar = {
     {"name": "expression", "symbols": [(myLexer.has("identifier") ? {type: "identifier"} : identifier)], "postprocess": id},
     {"name": "expression", "symbols": ["literal"], "postprocess": id},
     {"name": "expression", "symbols": ["function_call"], "postprocess": id},
+    {"name": "expression", "symbols": ["code_block"], "postprocess": id},
     {"name": "literal", "symbols": [(myLexer.has("number") ? {type: "number"} : number)], "postprocess": id},
     {"name": "literal", "symbols": [(myLexer.has("string") ? {type: "string"} : string)], "postprocess": id},
     {"name": "_", "symbols": []},

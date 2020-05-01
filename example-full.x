@@ -3,12 +3,25 @@ print(n)
 m = 4 + 5 * 6
 
 doIt(n m o) [
-    arr = [1 2 3 4]
-    dict = [
+    arr = { 1 2 3 4 }
+    dict = {
         1: 2     1: 2
         3: 4     3: 4
         5: 6     5: 6
+    }
+    a_block = [
+        print("n is greater than 4" 4 5)
     ]
+    if (n > 4 [
+        print("n is greater than 4" 4 5)
+    ] [
+        print("n is less than 4")
+    ])
+    
+    map(arr [item |
+        item * item
+    ])
+    
     if n > 4 [
         print("n is greater than 4" 4 5)
     ] else [

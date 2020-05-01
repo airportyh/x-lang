@@ -1,0 +1,128 @@
+{
+  "type": "program",
+  "body": [
+    {
+      "type": "assignment",
+      "var_name": {
+        "type": "identifier",
+        "value": "n",
+        "text": "n",
+        "offset": 0,
+        "lineBreaks": 0,
+        "line": 1,
+        "col": 1
+      },
+      "value": {
+        "type": "number",
+        "value": 4,
+        "text": "4",
+        "offset": 4,
+        "lineBreaks": 0,
+        "line": 1,
+        "col": 5
+      }
+    },
+    {
+      "type": "function_call",
+      "fun_name": {
+        "type": "identifier",
+        "value": "if",
+        "text": "if",
+        "offset": 6,
+        "lineBreaks": 0,
+        "line": 2,
+        "col": 1
+      },
+      "parameters": [
+        {
+          "type": "function_call",
+          "fun_name": {
+            "type": "identifier",
+            "value": "gt",
+            "text": "gt",
+            "offset": 10,
+            "lineBreaks": 0,
+            "line": 2,
+            "col": 5
+          },
+          "parameters": [
+            {
+              "type": "identifier",
+              "value": "n",
+              "text": "n",
+              "offset": 13,
+              "lineBreaks": 0,
+              "line": 2,
+              "col": 8
+            },
+            {
+              "type": "number",
+              "value": 7,
+              "text": "7",
+              "offset": 15,
+              "lineBreaks": 0,
+              "line": 2,
+              "col": 10
+            }
+          ]
+        },
+        {
+          "type": "code_block",
+          "statements": [
+            {
+              "type": "function_call",
+              "fun_name": {
+                "type": "identifier",
+                "value": "print",
+                "text": "print",
+                "offset": 24,
+                "lineBreaks": 0,
+                "line": 3,
+                "col": 5
+              },
+              "parameters": [
+                {
+                  "type": "string",
+                  "value": "\"It's too big\"",
+                  "text": "\"It's too big\"",
+                  "offset": 30,
+                  "lineBreaks": 0,
+                  "line": 3,
+                  "col": 11
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "code_block",
+          "statements": [
+            {
+              "type": "function_call",
+              "fun_name": {
+                "type": "identifier",
+                "value": "print",
+                "text": "print",
+                "offset": 54,
+                "lineBreaks": 0,
+                "line": 5,
+                "col": 5
+              },
+              "parameters": [
+                {
+                  "type": "string",
+                  "value": "\"It's fine\"",
+                  "text": "\"It's fine\"",
+                  "offset": 60,
+                  "lineBreaks": 0,
+                  "line": 5,
+                  "col": 11
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

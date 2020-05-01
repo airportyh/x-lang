@@ -61,15 +61,24 @@ function_call -> %identifier _ "(" _ parameter_list _ ")"
 #    ...
 # ]
 function_definition -> 
-    %identifier _ "(" _ parameter_list _ ")"  _ 
-    "[" _ "\n" statements "\n" _ "]"
+    %identifier _ "(" _ parameter_list _ ")"  _ code_block
     {%
         (data) => {
             return {
                 type: "function_definition",
                 fun_name: data[0],
                 parameters: data[4],
-                body: data[11]
+                body: data[8]
+            }
+        }
+    %}
+    
+code_block -> "[" _ "\n" statements "\n" _ "]"
+    {%
+        (data) => {
+            return {
+                type: "code_block",
+                statements: data[3]
             }
         }
     %}
@@ -96,6 +105,7 @@ expression
     -> %identifier    {% id %}
     |  literal        {% id %}
     |  function_call  {% id %}
+    |  code_block     {% id %}
 
 literal
     -> %number  {% id %}
