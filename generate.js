@@ -53,6 +53,23 @@ function $if(cond, consequent, alternate) {
         alternate();
     }
 }
+
+function each(arr, fun) {
+    return arr.forEach(fun);
+}
+
+function map(arr, fun) {
+    return arr.map(fun);
+}
+
+function filter(arr, fun) {
+    return arr.filter(fun);
+}
+
+function reduce(arr, fun, initValue) {
+    return arr.reduce(fun, initValue);
+}
+    
 `;
 
 async function main() {
@@ -99,7 +116,11 @@ function generate(node) {
     } else if (node.type === "code_block") {
         const body = node.statements.map(generate).join(";\n") + ";";
         const indentedBody = body.split("\n").map(line => "\t" + line).join("\n");
-        return `function () {\n${indentedBody}\n}`;
+        const params = node.paramaters.map(generate).join(", ");
+        return `function (${params}) {\n${indentedBody}\n}`;
+    } else if (node.type === "array_literal") {
+        const items = node.items.map(generate).join(", ");
+        return `[${items}]`;
     } else {
         throw new Error(`Unknown node type: ${node.type}`);
     }

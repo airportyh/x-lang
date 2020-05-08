@@ -46,7 +46,7 @@ assignment -> %identifier _ "=" _ expression
     %}
 
 # doIt(a b c)
-function_call -> %identifier _ "(" _ parameter_list _ ")"
+function_call -> %identifier _ "(" _ expression_list _ ")"
     {%
         (data) => {
             return {
@@ -61,7 +61,7 @@ function_call -> %identifier _ "(" _ parameter_list _ ")"
 #    ...
 # ]
 function_definition -> 
-    %identifier _ "(" _ parameter_list _ ")"  _ code_block
+    %identifier _ "(" _ expression_list _ ")"  _ code_block
     {%
         (data) => {
             return {
@@ -73,28 +73,43 @@ function_definition ->
         }
     %}
     
-code_block -> "[" _ "\n" statements "\n" _ "]"
-    {%
-        (data) => {
-            return {
-                type: "code_block",
-                statements: data[3]
-            }
-        }
-    %}
-
-parameter_list
-    -> null
+code_block
+    -> "[" _ "\n" statements "\n" _ "]"
         {%
-            () => []
+            (data) => {
+                return {
+                    type: "code_block",
+                    statements: data[3]
+                }
+            }
         %}
-    | expression
+    |  "[" _ code_block_parameters _ "\n" statements "\n" _ "]"
+        {%
+            (data) => {
+                return {
+                    type: "code_block",
+                    paramaters: data[2],
+                    statements: data[5]
+                }
+            }
+        %}
+
+code_block_parameters
+    -> "|" _ expression_list _ "|"
+        {%
+            (data) => {
+                return data[2]
+            }
+        %}
+
+expression_list
+    -> expression
         {%
             (data) => {
                 return [data[0]]
             }
         %}
-    |  expression __ parameter_list
+    |  expression __ expression_list
         {%
             (data) => {
                 return [data[0], ...data[2]]
@@ -106,11 +121,32 @@ expression
     |  literal        {% id %}
     |  function_call  {% id %}
     |  code_block     {% id %}
+    |  array_literal  {% id %}
 
 literal
     -> %number  {% id %}
     |  %string  {% id %}
 
+# { 1 2 3 4 }
+array_literal
+    -> "{" _ expression_list _ "}"
+        {%
+            (data) => {
+                return {
+                    type: "array_literal",
+                    items: data[2]
+                }
+            }
+        %}
+    |  "{" _ "}"
+        {%
+            () => {
+                return {
+                    type: "array_literal",
+                    items: []
+                }
+            }
+        %}
 
 # optional whitespace
 _ 

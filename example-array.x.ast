@@ -1,0 +1,184 @@
+{
+  "type": "program",
+  "body": [
+    {
+      "type": "assignment",
+      "var_name": {
+        "type": "identifier",
+        "value": "arr",
+        "text": "arr",
+        "offset": 0,
+        "lineBreaks": 0,
+        "line": 1,
+        "col": 1
+      },
+      "value": {
+        "type": "array_literal",
+        "items": [
+          {
+            "type": "number",
+            "value": 1,
+            "text": "1",
+            "offset": 8,
+            "lineBreaks": 0,
+            "line": 1,
+            "col": 9
+          },
+          {
+            "type": "number",
+            "value": 2,
+            "text": "2",
+            "offset": 10,
+            "lineBreaks": 0,
+            "line": 1,
+            "col": 11
+          },
+          {
+            "type": "number",
+            "value": 3,
+            "text": "3",
+            "offset": 12,
+            "lineBreaks": 0,
+            "line": 1,
+            "col": 13
+          },
+          {
+            "type": "number",
+            "value": 4,
+            "text": "4",
+            "offset": 14,
+            "lineBreaks": 0,
+            "line": 1,
+            "col": 15
+          },
+          {
+            "type": "number",
+            "value": 5,
+            "text": "5",
+            "offset": 16,
+            "lineBreaks": 0,
+            "line": 1,
+            "col": 17
+          },
+          {
+            "type": "number",
+            "value": 6,
+            "text": "6",
+            "offset": 18,
+            "lineBreaks": 0,
+            "line": 1,
+            "col": 19
+          }
+        ]
+      }
+    },
+    {
+      "type": "function_call",
+      "fun_name": {
+        "type": "identifier",
+        "value": "print",
+        "text": "print",
+        "offset": 22,
+        "lineBreaks": 0,
+        "line": 2,
+        "col": 1
+      },
+      "parameters": [
+        {
+          "type": "identifier",
+          "value": "arr",
+          "text": "arr",
+          "offset": 28,
+          "lineBreaks": 0,
+          "line": 2,
+          "col": 7
+        }
+      ]
+    },
+    {
+      "type": "function_call",
+      "fun_name": {
+        "type": "identifier",
+        "value": "each",
+        "text": "each",
+        "offset": 33,
+        "lineBreaks": 0,
+        "line": 3,
+        "col": 1
+      },
+      "parameters": [
+        {
+          "type": "identifier",
+          "value": "arr",
+          "text": "arr",
+          "offset": 38,
+          "lineBreaks": 0,
+          "line": 3,
+          "col": 6
+        },
+        {
+          "type": "code_block",
+          "paramaters": [
+            {
+              "type": "identifier",
+              "value": "item",
+              "text": "item",
+              "offset": 44,
+              "lineBreaks": 0,
+              "line": 3,
+              "col": 12
+            }
+          ],
+          "statements": [
+            {
+              "type": "function_call",
+              "fun_name": {
+                "type": "identifier",
+                "value": "print",
+                "text": "print",
+                "offset": 54,
+                "lineBreaks": 0,
+                "line": 4,
+                "col": 5
+              },
+              "parameters": [
+                {
+                  "type": "function_call",
+                  "fun_name": {
+                    "type": "identifier",
+                    "value": "mul",
+                    "text": "mul",
+                    "offset": 60,
+                    "lineBreaks": 0,
+                    "line": 4,
+                    "col": 11
+                  },
+                  "parameters": [
+                    {
+                      "type": "identifier",
+                      "value": "item",
+                      "text": "item",
+                      "offset": 64,
+                      "lineBreaks": 0,
+                      "line": 4,
+                      "col": 15
+                    },
+                    {
+                      "type": "identifier",
+                      "value": "item",
+                      "text": "item",
+                      "offset": 69,
+                      "lineBreaks": 0,
+                      "line": 4,
+                      "col": 20
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

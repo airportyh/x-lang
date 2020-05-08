@@ -2,6 +2,7 @@ const nearley = require("nearley");
 const grammar = require("./grammar.js");
 const fs = require("fs").promises;
 const path = require("path");
+const util = require("util");
 
 async function main() {
     const filename = process.argv[2];
@@ -16,7 +17,7 @@ async function main() {
 
     if (parser.results.length > 1) {
         console.warn("The parse tree generates multiple results.");
-        console.log(parser.results);
+        console.log(util.inspect(parser.results, { depth: 10 }));
     } else if (parser.results.length === 0) {
         console.error("Unexpected end of file");
         process.exit(1);

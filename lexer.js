@@ -6,9 +6,12 @@ module.exports = moo.compile({
     string:          /"(?:\\["\\]|[^\n"\\])*"/,
     left_bracket:    '[',
     right_bracket:   ']',
+    left_brace:      '{',
+    right_brace:     '}',
     left_paren:      '(',
     right_paren:     ')',
     assignment_op:   "=",
+    bar:             '|',
     identifier:      /[a-zA-Z_][a-zA-Z0-9_]*/,
     newline:         { match: /\n/, lineBreaks: true },
 });
