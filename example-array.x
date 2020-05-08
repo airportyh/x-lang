@@ -4,3 +4,5 @@ each(arr [|item|
     print(mul(item item))
     item * item
 ])
+
+
