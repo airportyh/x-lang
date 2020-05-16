@@ -61,7 +61,7 @@ function_call -> %identifier _ "(" _ expression_list _ ")"
 #    ...
 # ]
 function_definition -> 
-    %identifier _ "(" _ expression_list _ ")"  _ code_block
+    %identifier _ "(" _ expression_list _ ")"  _ code_block_wo_parameters
     {%
         (data) => {
             return {
@@ -74,22 +74,25 @@ function_definition ->
     %}
     
 code_block
+    -> code_block_wo_parameters
+    |  "[" _ code_block_parameters _ "\n" statements "\n" _ "]"
+        {%
+            (data) => {
+                return {
+                    type: "code_block",
+                    parameters: data[2],
+                    statements: data[5]
+                }
+            }
+        %}
+
+code_block_wo_parameters
     -> "[" _ "\n" statements "\n" _ "]"
         {%
             (data) => {
                 return {
                     type: "code_block",
                     statements: data[3]
-                }
-            }
-        %}
-    |  "[" _ code_block_parameters _ "\n" statements "\n" _ "]"
-        {%
-            (data) => {
-                return {
-                    type: "code_block",
-                    paramaters: data[2],
-                    statements: data[5]
                 }
             }
         %}
@@ -121,32 +124,55 @@ expression
     |  literal        {% id %}
     |  function_call  {% id %}
     |  code_block     {% id %}
-    |  array_literal  {% id %}
 
 literal
-    -> %number  {% id %}
-    |  %string  {% id %}
+    -> %number             {% id %}
+    |  %string             {% id %}
+    |  sequence_literal    {% id %}
 
 # { 1 2 3 4 }
-array_literal
-    -> "{" _ expression_list _ "}"
+sequence_literal
+    -> optional_tag "{" _ expression_list _ "}"
         {%
             (data) => {
+                const tagName = data[0] || "array";
+                if (tagName === "dict") {
+                    throw new Error("Tagged a sequence as a dict");
+                }
                 return {
-                    type: "array_literal",
-                    items: data[2]
+                    type: tagName + "_literal",
+                    items: data[3]
                 }
             }
         %}
-    |  "{" _ "}"
+    |  optional_tag "{" _ "}"
         {%
-            () => {
+            (data) => {
+                const tagName = data[0] || "array";
+                if (tagName === "dict") {
+                    throw new Error("Tagged a sequence as a dict");
+                }
                 return {
-                    type: "array_literal",
+                    type: tagName + "_literal",
                     items: []
                 }
             }
         %}
+
+optional_tag
+    -> null {% () => null %}
+    |  tag  {% id %}
+
+tag ->
+    "<" tag_name ">"
+    {%
+        (data) => data[1]
+    %}
+
+tag_name
+    -> "array"   {% id %}
+    |  "dict"    {% id %}
+    |  "set"     {% id %}
 
 # optional whitespace
 _ 

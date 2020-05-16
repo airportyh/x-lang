@@ -1,0 +1,160 @@
+{
+  "type": "program",
+  "body": [
+    {
+      "type": "assignment",
+      "var_name": {
+        "type": "identifier",
+        "value": "a_array",
+        "text": "a_array",
+        "offset": 0,
+        "lineBreaks": 0,
+        "line": 1,
+        "col": 1
+      },
+      "value": {
+        "type": "array_literal",
+        "items": [
+          {
+            "type": "number",
+            "value": 1,
+            "text": "1",
+            "offset": 19,
+            "lineBreaks": 0,
+            "line": 1,
+            "col": 20
+          },
+          {
+            "type": "number",
+            "value": 2,
+            "text": "2",
+            "offset": 21,
+            "lineBreaks": 0,
+            "line": 1,
+            "col": 22
+          },
+          {
+            "type": "number",
+            "value": 3,
+            "text": "3",
+            "offset": 23,
+            "lineBreaks": 0,
+            "line": 1,
+            "col": 24
+          }
+        ]
+      }
+    },
+    {
+      "type": "assignment",
+      "var_name": {
+        "type": "identifier",
+        "value": "a_set",
+        "text": "a_set",
+        "offset": 27,
+        "lineBreaks": 0,
+        "line": 2,
+        "col": 1
+      },
+      "value": {
+        "type": "set_literal",
+        "items": [
+          {
+            "type": "number",
+            "value": 2,
+            "text": "2",
+            "offset": 42,
+            "lineBreaks": 0,
+            "line": 2,
+            "col": 16
+          },
+          {
+            "type": "number",
+            "value": 4,
+            "text": "4",
+            "offset": 44,
+            "lineBreaks": 0,
+            "line": 2,
+            "col": 18
+          },
+          {
+            "type": "number",
+            "value": 5,
+            "text": "5",
+            "offset": 46,
+            "lineBreaks": 0,
+            "line": 2,
+            "col": 20
+          }
+        ]
+      }
+    },
+    {
+      "type": "assignment",
+      "var_name": {
+        "type": "identifier",
+        "value": "a_array2",
+        "text": "a_array2",
+        "offset": 50,
+        "lineBreaks": 0,
+        "line": 3,
+        "col": 1
+      },
+      "value": {
+        "type": "array_literal",
+        "items": [
+          {
+            "type": "number",
+            "value": 1,
+            "text": "1",
+            "offset": 63,
+            "lineBreaks": 0,
+            "line": 3,
+            "col": 14
+          },
+          {
+            "type": "number",
+            "value": 2,
+            "text": "2",
+            "offset": 65,
+            "lineBreaks": 0,
+            "line": 3,
+            "col": 16
+          },
+          {
+            "type": "number",
+            "value": 3,
+            "text": "3",
+            "offset": 67,
+            "lineBreaks": 0,
+            "line": 3,
+            "col": 18
+          }
+        ]
+      }
+    },
+    {
+      "type": "function_call",
+      "fun_name": {
+        "type": "identifier",
+        "value": "print",
+        "text": "print",
+        "offset": 71,
+        "lineBreaks": 0,
+        "line": 4,
+        "col": 1
+      },
+      "parameters": [
+        {
+          "type": "identifier",
+          "value": "a_array2",
+          "text": "a_array2",
+          "offset": 77,
+          "lineBreaks": 0,
+          "line": 4,
+          "col": 7
+        }
+      ]
+    }
+  ]
+}

@@ -47,7 +47,7 @@ var grammar = {
             }
         }
             },
-    {"name": "function_definition", "symbols": [(myLexer.has("identifier") ? {type: "identifier"} : identifier), "_", {"literal":"("}, "_", "expression_list", "_", {"literal":")"}, "_", "code_block"], "postprocess": 
+    {"name": "function_definition", "symbols": [(myLexer.has("identifier") ? {type: "identifier"} : identifier), "_", {"literal":"("}, "_", "expression_list", "_", {"literal":")"}, "_", "code_block_wo_parameters"], "postprocess": 
         (data) => {
             return {
                 type: "function_definition",
@@ -57,20 +57,21 @@ var grammar = {
             }
         }
             },
-    {"name": "code_block", "symbols": [{"literal":"["}, "_", {"literal":"\n"}, "statements", {"literal":"\n"}, "_", {"literal":"]"}], "postprocess": 
-        (data) => {
-            return {
-                type: "code_block",
-                statements: data[3]
-            }
-        }
-                },
+    {"name": "code_block", "symbols": ["code_block_wo_parameters"]},
     {"name": "code_block", "symbols": [{"literal":"["}, "_", "code_block_parameters", "_", {"literal":"\n"}, "statements", {"literal":"\n"}, "_", {"literal":"]"}], "postprocess": 
         (data) => {
             return {
                 type: "code_block",
-                paramaters: data[2],
+                parameters: data[2],
                 statements: data[5]
+            }
+        }
+                },
+    {"name": "code_block_wo_parameters", "symbols": [{"literal":"["}, "_", {"literal":"\n"}, "statements", {"literal":"\n"}, "_", {"literal":"]"}], "postprocess": 
+        (data) => {
+            return {
+                type: "code_block",
+                statements: data[3]
             }
         }
                 },
@@ -93,25 +94,41 @@ var grammar = {
     {"name": "expression", "symbols": ["literal"], "postprocess": id},
     {"name": "expression", "symbols": ["function_call"], "postprocess": id},
     {"name": "expression", "symbols": ["code_block"], "postprocess": id},
-    {"name": "expression", "symbols": ["array_literal"], "postprocess": id},
     {"name": "literal", "symbols": [(myLexer.has("number") ? {type: "number"} : number)], "postprocess": id},
     {"name": "literal", "symbols": [(myLexer.has("string") ? {type: "string"} : string)], "postprocess": id},
-    {"name": "array_literal", "symbols": [{"literal":"{"}, "_", "expression_list", "_", {"literal":"}"}], "postprocess": 
+    {"name": "literal", "symbols": ["sequence_literal"], "postprocess": id},
+    {"name": "sequence_literal", "symbols": ["optional_tag", {"literal":"{"}, "_", "expression_list", "_", {"literal":"}"}], "postprocess": 
         (data) => {
+            const tagName = data[0] || "array";
+            if (tagName === "dict") {
+                throw new Error("Tagged a sequence as a dict");
+            }
             return {
-                type: "array_literal",
-                items: data[2]
+                type: tagName + "_literal",
+                items: data[3]
             }
         }
                 },
-    {"name": "array_literal", "symbols": [{"literal":"{"}, "_", {"literal":"}"}], "postprocess": 
-        () => {
+    {"name": "sequence_literal", "symbols": ["optional_tag", {"literal":"{"}, "_", {"literal":"}"}], "postprocess": 
+        (data) => {
+            const tagName = data[0] || "array";
+            if (tagName === "dict") {
+                throw new Error("Tagged a sequence as a dict");
+            }
             return {
-                type: "array_literal",
+                type: tagName + "_literal",
                 items: []
             }
         }
                 },
+    {"name": "optional_tag", "symbols": [], "postprocess": () => null},
+    {"name": "optional_tag", "symbols": ["tag"], "postprocess": id},
+    {"name": "tag", "symbols": [{"literal":"<"}, "tag_name", {"literal":">"}], "postprocess": 
+        (data) => data[1]
+            },
+    {"name": "tag_name", "symbols": [{"literal":"array"}], "postprocess": id},
+    {"name": "tag_name", "symbols": [{"literal":"dict"}], "postprocess": id},
+    {"name": "tag_name", "symbols": [{"literal":"set"}], "postprocess": id},
     {"name": "_", "symbols": []},
     {"name": "_", "symbols": ["__"]},
     {"name": "__", "symbols": [(myLexer.has("whitespace") ? {type: "whitespace"} : whitespace)]}

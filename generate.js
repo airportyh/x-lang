@@ -46,11 +46,15 @@ function gt(x, y) {
     return x > y;
 }
 
+function eq(one, other) {
+    return one === other;
+}
+
 function $if(cond, consequent, alternate) {
     if (cond) {
-        consequent();
+        return consequent();
     } else {
-        alternate();
+        return alternate();
     }
 }
 
@@ -108,22 +112,32 @@ function generate(node) {
         return node.value;
     } else if (node.type === "function_definition") {
         const funName = node.fun_name.value;
-        const params = node.parameters.map(generate)
-            .join(", ");
-        const body = node.body.statements.map(generate).join(";\n") + ";";
-        const indentedBody = body.split("\n").map(line => "\t" + line).join("\n");
-        return `function ${funName} (${params}) {\n${indentedBody}\n}`;
+        return generateFunction(node.body.statements, node.parameters, funName);
     } else if (node.type === "code_block") {
-        const body = node.statements.map(generate).join(";\n") + ";";
-        const indentedBody = body.split("\n").map(line => "\t" + line).join("\n");
-        const params = node.paramaters.map(generate).join(", ");
-        return `function (${params}) {\n${indentedBody}\n}`;
+        return generateFunction(node.statements, node.parameters);
     } else if (node.type === "array_literal") {
         const items = node.items.map(generate).join(", ");
         return `[${items}]`;
+    } else if (node.type === "set_literal") {
+        const items = node.items.map(generate).join(", ");
+        return `new Set([${items}])`;
     } else {
         throw new Error(`Unknown node type: ${node.type}`);
     }
+}
+
+function generateFunction(statements, parameters, name = "") {
+    const body = statements.map((statement, idx) => {
+        const js = generate(statement);
+        if (idx === statements.length - 1) {
+            return `return ${js}`;
+        } else {
+            return js;
+        }
+    }).join(";\n") + ";";
+    const indentedBody = body.split("\n").map(line => "\t" + line).join("\n");
+    const params = parameters.map(generate).join(", ");
+    return `function ${name}(${params}) {\n${indentedBody}\n}`;
 }
 
 main().catch(err => console.log(err.stack));
