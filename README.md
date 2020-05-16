@@ -12,7 +12,7 @@ You can find the video archives on [this YouTube playlist](https://www.youtube.c
 * [Episode 3](https://www.youtube.com/watch?v=PRg2OcuZ-jU&list=PLSq9OFrD2Q3DKGFCm0YRVRXZMO1KHNUXu): wrote a run script to conviniently execute programs in the X language. Implemented code blocks which are similar to anonymous function
 expressions in JS, and use that and a runtime $if function to implement conditionals instead of an if statement. ([commit](https://github.com/airportyh/x-lang/commit/75eb66bd4211fb2e62a6fcc90bfd8999445f23ba))
 * [Episode 4](https://www.youtube.com/watch?v=en4nUODGC6I): implemented array literals, `each`, `map`, `filter` and `reduce` functions and added parameters to code blocks. ([commit](https://github.com/airportyh/x-lang/commit/aad292e356271b269dd3a59c34ef843549843aef))
-* [Episode 5](https://www.youtube.com/watch?v=ME6Msxff8xI): implemented implicit returns and tags for collection types.
+* [Episode 5](https://www.youtube.com/watch?v=ME6Msxff8xI): implemented implicit returns and tags for collection types. ([commit](https://github.com/airportyh/x-lang/commit/7a6c7935f6be70394657db28c15a1e8b5b62f672))
 
 ## Project Dependencies
 
