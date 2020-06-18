@@ -25,7 +25,7 @@ doIt(n m o) [
         print("n is less than 4")
     ])
     
-    map(arr [item |
+    map(arr [ |item|
         item * item
     ])
     
