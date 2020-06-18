@@ -126,11 +126,16 @@ expression
     |  code_block     {% id %}
 
 literal
-    -> %number             {% id %}
-    |  %string             {% id %}
-    |  sequence_literal    {% id %}
+    -> %number                   {% id %}
+    |  %string                   {% id %}
+    |  empty_collection_literal  {% id %}
+    |  sequence_literal          {% id %}
+    |  dictionary_literal        {% id %}
 
 # { 1 2 3 4 }
+# A sequence is either an array or a set
+# A collection is either a sequence or a dictionary
+
 sequence_literal
     -> optional_tag "{" _ expression_list _ "}"
         {%
@@ -145,17 +150,60 @@ sequence_literal
                 }
             }
         %}
-    |  optional_tag "{" _ "}"
+
+empty_collection_literal
+    -> optional_tag "{" _ "}"
         {%
             (data) => {
                 const tagName = data[0] || "array";
                 if (tagName === "dict") {
-                    throw new Error("Tagged a sequence as a dict");
+                    return {
+                        type: "dict_literal",
+                        entries: [] // array of 2-element arrays: [key, value]
+                    };
+                } else {
+                    return {
+                        type: tagName + "_literal",
+                        items: []
+                    }
+                }
+            }
+        %}
+
+dictionary_literal
+    -> optional_tag "{" _ key_value_pair_list _ "}"
+        {%
+            (data) => {
+                const tagName = data[0] || "dict";
+                if (tagName !== "dict") {
+                    throw new Error("Tagged a dict as a " + tagName);
                 }
                 return {
-                    type: tagName + "_literal",
-                    items: []
-                }
+                    type: "dict_literal",
+                    entries: data[3]
+                };
+            }
+        %}
+
+key_value_pair_list
+    -> key_value_pair
+        {%
+            (data) => {
+                return [data[0]];
+            }
+        %}
+    |  key_value_pair __ key_value_pair_list
+        {%
+            (data) => {
+                return [data[0], ...data[2]];
+            }
+        %}
+
+key_value_pair
+    -> expression _ ":" _ expression
+        {%
+            (data) => {
+                return [data[0], data[4]];
             }
         %}
 
@@ -166,7 +214,9 @@ optional_tag
 tag ->
     "<" tag_name ">"
     {%
-        (data) => data[1]
+        (data) => {
+            return data[1].value;
+        }
     %}
 
 tag_name

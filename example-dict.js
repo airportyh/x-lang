@@ -1,14 +1,16 @@
-let a_array = [1, 2, 3];
-let a_set = new Set([2, 4, 5]);
-let a_array2 = [1, 2, 3];
-let a_dict = new Map([["name", "Maria"], ["age", 10]]);
-let empty_array = [];
-let empty_array_tag = [];
-let empty_set = new Set([]);
-let empty_dict = new Map([]);
-print(a_set);
-print(empty_dict);
-print(a_dict);
+let dict1 = new Map([[1, 2], [3, 4]]);
+let dict2 = new Map([["a", 2], ["b", 4]]);
+let dict3 = new Map([]);
+set(dict3, "foo", "bar");
+print(get(dict3, "foo"));
+set(dict3, "garage", "out");
+print(dict3);
+print("The dict has", size(dict3), "entries in it.");
+each(entries(dict3), function (entry) {
+	let key = at(entry, 0);
+	let value = at(entry, 1);
+	return print(key, "=", value);
+});
 /*
 Runtime functions:
 */
@@ -65,6 +67,14 @@ function $if(cond, consequent, alternate) {
     }
 }
 
+function split(str, separator) {
+    return str.split(separator);
+}
+
+function at(arr, index) {
+    return arr[index];
+}
+
 function each(arr, fun) {
     return arr.forEach(fun);
 }
@@ -79,4 +89,24 @@ function filter(arr, fun) {
 
 function reduce(arr, fun, initValue) {
     return arr.reduce(fun, initValue);
+}
+
+function entries(map) {
+    return Array.from(map.entries());
+}
+
+function get(map, key) {
+    return map.get(key);
+}
+
+function set(map, key, value) {
+    map.set(key, value);
+}
+
+function size(setOrMap) {
+    return setOrMap.size;
+}
+
+function length(arr) {
+    return arr.length;
 }

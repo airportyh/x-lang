@@ -1,14 +1,3 @@
-let a_array = [1, 2, 3];
-let a_set = new Set([2, 4, 5]);
-let a_array2 = [1, 2, 3];
-let a_dict = new Map([["name", "Maria"], ["age", 10]]);
-let empty_array = [];
-let empty_array_tag = [];
-let empty_set = new Set([]);
-let empty_dict = new Map([]);
-print(a_set);
-print(empty_dict);
-print(a_dict);
 /*
 Runtime functions:
 */
@@ -65,6 +54,14 @@ function $if(cond, consequent, alternate) {
     }
 }
 
+function split(str, separator) {
+    return str.split(separator);
+}
+
+function at(arr, index) {
+    return arr[index];
+}
+
 function each(arr, fun) {
     return arr.forEach(fun);
 }
@@ -79,4 +76,24 @@ function filter(arr, fun) {
 
 function reduce(arr, fun, initValue) {
     return arr.reduce(fun, initValue);
+}
+
+function entries(map) {
+    return Array.from(map.entries());
+}
+
+function get(map, key) {
+    return map.get(key);
+}
+
+function set(map, key, value) {
+    map.set(key, value);
+}
+
+function size(setOrMap) {
+    return setOrMap.size;
+}
+
+function length(arr) {
+    return arr.length;
 }
