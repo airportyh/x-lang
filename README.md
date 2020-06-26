@@ -14,7 +14,7 @@ expressions in JS, and use that and a runtime $if function to implement conditio
 * [Episode 4](http://tobyho.com/video/Live-Code-Making-a-Programming-Language-from-Scratch-Part-4.html): implemented array literals, `each`, `map`, `filter` and `reduce` functions and added parameters to code blocks. ([commit](https://github.com/airportyh/x-lang/commit/aad292e356271b269dd3a59c34ef843549843aef))
 * [Episode 5](https://www.youtube.com/watch?v=ME6Msxff8xI): implemented implicit returns and tags for collection types. ([commit](https://github.com/airportyh/x-lang/commit/7a6c7935f6be70394657db28c15a1e8b5b62f672))
 * [Episode 6](http://tobyho.com/video/Live-Code-Make-a-Programming-Language-From-Scratch-Part-6.html): implemented dictionaries. ([commit](https://github.com/airportyh/x-lang/commit/a1944028b5cb0659de62bf57f9866cd76623c1f8))
-
+* [Episode 7](https://www.youtube.com/watch?v=QU3mlMKx9lA): implemented proper if statements and talked about the dangling else problem. ([commit](https://github.com/airportyh/x-lang/commit/704dc7a66e6e39f04d73d72b51a1b147b53a82cb))
 ## Project Dependencies
 
 The project depends on this libraries:
