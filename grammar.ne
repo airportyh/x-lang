@@ -33,6 +33,7 @@ statement
     -> assignment           {% id %}
     |  function_call        {% id %}
     |  function_definition  {% id %}
+    |  if_statement         {% id %}
 
 assignment -> %identifier _ "=" _ expression
     {%
@@ -74,7 +75,7 @@ function_definition ->
     %}
     
 code_block
-    -> code_block_wo_parameters
+    -> code_block_wo_parameters     {% id %}
     |  "[" _ code_block_parameters _ "\n" statements "\n" _ "]"
         {%
             (data) => {
@@ -223,6 +224,28 @@ tag_name
     -> "array"   {% id %}
     |  "dict"    {% id %}
     |  "set"     {% id %}
+
+if_statement
+    -> "if" __ expression MLWS code_block (MLWS "else" MLWS code_block):?
+        {%
+            (data) => {
+                return {
+                    type: "if_statement",
+                    conditional: data[2],
+                    consequent: data[4],
+                    alternate: data[5] && data[5][3]
+                }
+            }
+        %}
+
+# MLWS
+MLWS
+    -> MLWSC
+    |  MLWSC MLWS
+
+MLWSC
+    -> __
+    |  %newline
 
 # optional whitespace
 _ 

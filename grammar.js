@@ -29,6 +29,7 @@ var grammar = {
     {"name": "statement", "symbols": ["assignment"], "postprocess": id},
     {"name": "statement", "symbols": ["function_call"], "postprocess": id},
     {"name": "statement", "symbols": ["function_definition"], "postprocess": id},
+    {"name": "statement", "symbols": ["if_statement"], "postprocess": id},
     {"name": "assignment", "symbols": [(myLexer.has("identifier") ? {type: "identifier"} : identifier), "_", {"literal":"="}, "_", "expression"], "postprocess": 
         (data) => {
             return {
@@ -57,7 +58,7 @@ var grammar = {
             }
         }
             },
-    {"name": "code_block", "symbols": ["code_block_wo_parameters"]},
+    {"name": "code_block", "symbols": ["code_block_wo_parameters"], "postprocess": id},
     {"name": "code_block", "symbols": [{"literal":"["}, "_", "code_block_parameters", "_", {"literal":"\n"}, "statements", {"literal":"\n"}, "_", {"literal":"]"}], "postprocess": 
         (data) => {
             return {
@@ -164,6 +165,23 @@ var grammar = {
     {"name": "tag_name", "symbols": [{"literal":"array"}], "postprocess": id},
     {"name": "tag_name", "symbols": [{"literal":"dict"}], "postprocess": id},
     {"name": "tag_name", "symbols": [{"literal":"set"}], "postprocess": id},
+    {"name": "if_statement$ebnf$1$subexpression$1", "symbols": ["MLWS", {"literal":"else"}, "MLWS", "code_block"]},
+    {"name": "if_statement$ebnf$1", "symbols": ["if_statement$ebnf$1$subexpression$1"], "postprocess": id},
+    {"name": "if_statement$ebnf$1", "symbols": [], "postprocess": function(d) {return null;}},
+    {"name": "if_statement", "symbols": [{"literal":"if"}, "__", "expression", "MLWS", "code_block", "if_statement$ebnf$1"], "postprocess": 
+        (data) => {
+            return {
+                type: "if_statement",
+                conditional: data[2],
+                consequent: data[4],
+                alternate: data[5] && data[5][3]
+            }
+        }
+                },
+    {"name": "MLWS", "symbols": ["MLWSC"]},
+    {"name": "MLWS", "symbols": ["MLWSC", "MLWS"]},
+    {"name": "MLWSC", "symbols": ["__"]},
+    {"name": "MLWSC", "symbols": [(myLexer.has("newline") ? {type: "newline"} : newline)]},
     {"name": "_", "symbols": []},
     {"name": "_", "symbols": ["__"]},
     {"name": "__", "symbols": [(myLexer.has("whitespace") ? {type: "whitespace"} : whitespace)]}

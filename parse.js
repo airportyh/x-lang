@@ -17,7 +17,12 @@ async function main() {
 
     if (parser.results.length > 1) {
         console.warn("The parse tree generates multiple results.");
-        console.log(util.inspect(parser.results, { depth: 10 }));
+        for (let i = 0; i < parser.results.length; i++) {
+            const ast = parser.results[i];
+            const astFilename = path.basename(filename) + i + ".ast";
+            await fs.writeFile(astFilename, JSON.stringify(ast, null, "  "));
+            console.log(`Wrote ${astFilename}.`);
+        }
     } else if (parser.results.length === 0) {
         console.error("Unexpected end of file");
         process.exit(1);
