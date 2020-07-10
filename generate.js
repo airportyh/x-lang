@@ -12,8 +12,9 @@ async function main() {
     const astCode = (await fs.readFile(filename)).toString();
     const ast = JSON.parse(astCode);
     const jsCode = generate(ast);
+    const baseDir = path.dirname(filename);
     const baseName = path.basename(filename, ".x.ast");
-    const jsFilename = `${baseName}.js`;
+    const jsFilename = path.join(baseDir, `${baseName}.js`);
     await fs.writeFile(jsFilename, jsCode);
     console.log(`Wrote ${jsFilename}.`);
 }
@@ -58,13 +59,14 @@ function generate(node) {
         return `new Map([${entries}])`;
     } else if (node.type === "if_statement") {
         const conditional = generate(node.conditional);
-        const ifStatement = `if (${conditional}) ${generateBlock(node.consequent)}`;
-        if (node.alternate) {
-            const elseStatement = ` else ${generateBlock(node.alternate)}`;
-            return ifStatement + elseStatement;
-        } else {
-            return ifStatement;
-        }
+        const ifStatement = [
+            `$if(${conditional}, `,
+            `${generateFunction(node.consequent.statements, [])},`,
+            `${generateFunction(node.alternate.statements, [])})`
+        ].join("");
+        return ifStatement;
+    } else if (node.type === "regex") {
+        return node.value;
     } else {
         throw new Error(`Unknown node type: ${node.type}`);
     }

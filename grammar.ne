@@ -34,6 +34,7 @@ statement
     |  function_call        {% id %}
     |  function_definition  {% id %}
     |  if_statement         {% id %}
+    |  %identifier          {% id %}
 
 assignment -> %identifier _ "=" _ expression
     {%
@@ -132,6 +133,7 @@ literal
     |  empty_collection_literal  {% id %}
     |  sequence_literal          {% id %}
     |  dictionary_literal        {% id %}
+    |  %regex                    {% id %}
 
 # { 1 2 3 4 }
 # A sequence is either an array or a set
@@ -226,14 +228,14 @@ tag_name
     |  "set"     {% id %}
 
 if_statement
-    -> "if" __ expression MLWS code_block (MLWS "else" MLWS code_block):?
+    -> "if" __ expression MLWS code_block MLWS "else" MLWS code_block
         {%
             (data) => {
                 return {
                     type: "if_statement",
                     conditional: data[2],
                     consequent: data[4],
-                    alternate: data[5] && data[5][3]
+                    alternate: data[8]
                 }
             }
         %}

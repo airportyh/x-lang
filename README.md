@@ -28,12 +28,13 @@ Also see my course [How to Make a Programming Language](https://www.youtube.com/
 
 ## Todos
 
-* native if statement
 * index notation syntax
+* operators
 * classes
+* Unicode support (use different languages and emojis for var names)
 * Add enough feature to be able to solve some code challenges and do the word summary program
 * Clojure style protocols
-* Unicode support (use different languages and emojis for var names)
 * FS support
 * DOM support
 
+* native if statement (done)

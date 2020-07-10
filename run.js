@@ -7,7 +7,8 @@ async function main() {
     const filename = process.argv[2];
     await myExec(`node parse.js ${filename}`);
     await myExec(`node generate.js ${filename}.ast`);
-    const jsFilename = path.basename(filename, '.x') + '.js';
+    const baseDir = path.dirname(filename);
+    const jsFilename = path.join(baseDir, path.basename(filename, '.x') + '.js');
     await myExec(`node ${jsFilename}`, 'green');
 }
 

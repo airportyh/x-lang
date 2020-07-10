@@ -1,3 +1,6 @@
+// This is a test file for the lexer which was
+// initially created to play around. It is no longer
+// needed.
 const fs = require("fs").promises;
 const lexer = require("./lexer");
 

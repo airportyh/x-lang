@@ -1,0 +1,571 @@
+{
+  "type": "program",
+  "body": [
+    {
+      "type": "function_definition",
+      "fun_name": {
+        "type": "identifier",
+        "value": "capitalize",
+        "text": "capitalize",
+        "offset": 0,
+        "lineBreaks": 0,
+        "line": 1,
+        "col": 1
+      },
+      "parameters": [
+        {
+          "type": "identifier",
+          "value": "string",
+          "text": "string",
+          "offset": 11,
+          "lineBreaks": 0,
+          "line": 1,
+          "col": 12
+        }
+      ],
+      "body": {
+        "type": "code_block",
+        "statements": [
+          {
+            "type": "assignment",
+            "var_name": {
+              "type": "identifier",
+              "value": "first",
+              "text": "first",
+              "offset": 25,
+              "lineBreaks": 0,
+              "line": 2,
+              "col": 5
+            },
+            "value": {
+              "type": "function_call",
+              "fun_name": {
+                "type": "identifier",
+                "value": "toUpperCase",
+                "text": "toUpperCase",
+                "offset": 33,
+                "lineBreaks": 0,
+                "line": 2,
+                "col": 13
+              },
+              "parameters": [
+                {
+                  "type": "function_call",
+                  "fun_name": {
+                    "type": "identifier",
+                    "value": "at",
+                    "text": "at",
+                    "offset": 45,
+                    "lineBreaks": 0,
+                    "line": 2,
+                    "col": 25
+                  },
+                  "parameters": [
+                    {
+                      "type": "identifier",
+                      "value": "string",
+                      "text": "string",
+                      "offset": 48,
+                      "lineBreaks": 0,
+                      "line": 2,
+                      "col": 28
+                    },
+                    {
+                      "type": "number",
+                      "value": 0,
+                      "text": "0",
+                      "offset": 55,
+                      "lineBreaks": 0,
+                      "line": 2,
+                      "col": 35
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "type": "assignment",
+            "var_name": {
+              "type": "identifier",
+              "value": "rest",
+              "text": "rest",
+              "offset": 63,
+              "lineBreaks": 0,
+              "line": 3,
+              "col": 5
+            },
+            "value": {
+              "type": "function_call",
+              "fun_name": {
+                "type": "identifier",
+                "value": "substring",
+                "text": "substring",
+                "offset": 70,
+                "lineBreaks": 0,
+                "line": 3,
+                "col": 12
+              },
+              "parameters": [
+                {
+                  "type": "identifier",
+                  "value": "string",
+                  "text": "string",
+                  "offset": 80,
+                  "lineBreaks": 0,
+                  "line": 3,
+                  "col": 22
+                },
+                {
+                  "type": "number",
+                  "value": 1,
+                  "text": "1",
+                  "offset": 87,
+                  "lineBreaks": 0,
+                  "line": 3,
+                  "col": 29
+                }
+              ]
+            }
+          },
+          {
+            "type": "function_call",
+            "fun_name": {
+              "type": "identifier",
+              "value": "concat",
+              "text": "concat",
+              "offset": 94,
+              "lineBreaks": 0,
+              "line": 4,
+              "col": 5
+            },
+            "parameters": [
+              {
+                "type": "identifier",
+                "value": "first",
+                "text": "first",
+                "offset": 101,
+                "lineBreaks": 0,
+                "line": 4,
+                "col": 12
+              },
+              {
+                "type": "identifier",
+                "value": "rest",
+                "text": "rest",
+                "offset": 107,
+                "lineBreaks": 0,
+                "line": 4,
+                "col": 18
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "function_definition",
+      "fun_name": {
+        "type": "identifier",
+        "value": "toCamelCase",
+        "text": "toCamelCase",
+        "offset": 116,
+        "lineBreaks": 0,
+        "line": 7,
+        "col": 1
+      },
+      "parameters": [
+        {
+          "type": "identifier",
+          "value": "string",
+          "text": "string",
+          "offset": 128,
+          "lineBreaks": 0,
+          "line": 7,
+          "col": 13
+        }
+      ],
+      "body": {
+        "type": "code_block",
+        "statements": [
+          {
+            "type": "assignment",
+            "var_name": {
+              "type": "identifier",
+              "value": "parts",
+              "text": "parts",
+              "offset": 142,
+              "lineBreaks": 0,
+              "line": 8,
+              "col": 5
+            },
+            "value": {
+              "type": "function_call",
+              "fun_name": {
+                "type": "identifier",
+                "value": "split",
+                "text": "split",
+                "offset": 150,
+                "lineBreaks": 0,
+                "line": 8,
+                "col": 13
+              },
+              "parameters": [
+                {
+                  "type": "identifier",
+                  "value": "string",
+                  "text": "string",
+                  "offset": 156,
+                  "lineBreaks": 0,
+                  "line": 8,
+                  "col": 19
+                },
+                {
+                  "type": "regex",
+                  "value": "/[-_]/",
+                  "text": "/[-_]/",
+                  "offset": 163,
+                  "lineBreaks": 0,
+                  "line": 8,
+                  "col": 26
+                }
+              ]
+            }
+          },
+          {
+            "type": "function_call",
+            "fun_name": {
+              "type": "identifier",
+              "value": "join",
+              "text": "join",
+              "offset": 175,
+              "lineBreaks": 0,
+              "line": 9,
+              "col": 5
+            },
+            "parameters": [
+              {
+                "type": "function_call",
+                "fun_name": {
+                  "type": "identifier",
+                  "value": "map",
+                  "text": "map",
+                  "offset": 180,
+                  "lineBreaks": 0,
+                  "line": 9,
+                  "col": 10
+                },
+                "parameters": [
+                  {
+                    "type": "identifier",
+                    "value": "parts",
+                    "text": "parts",
+                    "offset": 184,
+                    "lineBreaks": 0,
+                    "line": 9,
+                    "col": 14
+                  },
+                  {
+                    "type": "code_block",
+                    "parameters": [
+                      {
+                        "type": "identifier",
+                        "value": "part",
+                        "text": "part",
+                        "offset": 192,
+                        "lineBreaks": 0,
+                        "line": 9,
+                        "col": 22
+                      },
+                      {
+                        "type": "identifier",
+                        "value": "idx",
+                        "text": "idx",
+                        "offset": 197,
+                        "lineBreaks": 0,
+                        "line": 9,
+                        "col": 27
+                      }
+                    ],
+                    "statements": [
+                      {
+                        "type": "if_statement",
+                        "conditional": {
+                          "type": "function_call",
+                          "fun_name": {
+                            "type": "identifier",
+                            "value": "eq",
+                            "text": "eq",
+                            "offset": 213,
+                            "lineBreaks": 0,
+                            "line": 10,
+                            "col": 12
+                          },
+                          "parameters": [
+                            {
+                              "type": "identifier",
+                              "value": "idx",
+                              "text": "idx",
+                              "offset": 216,
+                              "lineBreaks": 0,
+                              "line": 10,
+                              "col": 15
+                            },
+                            {
+                              "type": "number",
+                              "value": 0,
+                              "text": "0",
+                              "offset": 220,
+                              "lineBreaks": 0,
+                              "line": 10,
+                              "col": 19
+                            }
+                          ]
+                        },
+                        "consequent": {
+                          "type": "code_block",
+                          "statements": [
+                            {
+                              "type": "identifier",
+                              "value": "part",
+                              "text": "part",
+                              "offset": 237,
+                              "lineBreaks": 0,
+                              "line": 11,
+                              "col": 13
+                            }
+                          ]
+                        },
+                        "alternate": {
+                          "type": "code_block",
+                          "statements": [
+                            {
+                              "type": "function_call",
+                              "fun_name": {
+                                "type": "identifier",
+                                "value": "capitalize",
+                                "text": "capitalize",
+                                "offset": 271,
+                                "lineBreaks": 0,
+                                "line": 13,
+                                "col": 13
+                              },
+                              "parameters": [
+                                {
+                                  "type": "identifier",
+                                  "value": "part",
+                                  "text": "part",
+                                  "offset": 282,
+                                  "lineBreaks": 0,
+                                  "line": 13,
+                                  "col": 24
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "string",
+                "value": "\"\"",
+                "text": "\"\"",
+                "offset": 305,
+                "lineBreaks": 0,
+                "line": 15,
+                "col": 8
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "function_call",
+      "fun_name": {
+        "type": "identifier",
+        "value": "print",
+        "text": "print",
+        "offset": 312,
+        "lineBreaks": 0,
+        "line": 18,
+        "col": 1
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "value": "\"\\\"\\\" =>\"",
+          "text": "\"\\\"\\\" =>\"",
+          "offset": 318,
+          "lineBreaks": 0,
+          "line": 18,
+          "col": 7
+        },
+        {
+          "type": "function_call",
+          "fun_name": {
+            "type": "identifier",
+            "value": "toCamelCase",
+            "text": "toCamelCase",
+            "offset": 328,
+            "lineBreaks": 0,
+            "line": 18,
+            "col": 17
+          },
+          "parameters": [
+            {
+              "type": "string",
+              "value": "\"\"",
+              "text": "\"\"",
+              "offset": 340,
+              "lineBreaks": 0,
+              "line": 18,
+              "col": 29
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "function_call",
+      "fun_name": {
+        "type": "identifier",
+        "value": "print",
+        "text": "print",
+        "offset": 345,
+        "lineBreaks": 0,
+        "line": 19,
+        "col": 1
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "value": "\"the-stealth-warrior =>\"",
+          "text": "\"the-stealth-warrior =>\"",
+          "offset": 351,
+          "lineBreaks": 0,
+          "line": 19,
+          "col": 7
+        },
+        {
+          "type": "function_call",
+          "fun_name": {
+            "type": "identifier",
+            "value": "toCamelCase",
+            "text": "toCamelCase",
+            "offset": 376,
+            "lineBreaks": 0,
+            "line": 19,
+            "col": 32
+          },
+          "parameters": [
+            {
+              "type": "string",
+              "value": "\"the-stealth-warrior\"",
+              "text": "\"the-stealth-warrior\"",
+              "offset": 388,
+              "lineBreaks": 0,
+              "line": 19,
+              "col": 44
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "function_call",
+      "fun_name": {
+        "type": "identifier",
+        "value": "print",
+        "text": "print",
+        "offset": 412,
+        "lineBreaks": 0,
+        "line": 20,
+        "col": 1
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "value": "\"The-Stealth-Warrior =>\"",
+          "text": "\"The-Stealth-Warrior =>\"",
+          "offset": 418,
+          "lineBreaks": 0,
+          "line": 20,
+          "col": 7
+        },
+        {
+          "type": "function_call",
+          "fun_name": {
+            "type": "identifier",
+            "value": "toCamelCase",
+            "text": "toCamelCase",
+            "offset": 443,
+            "lineBreaks": 0,
+            "line": 20,
+            "col": 32
+          },
+          "parameters": [
+            {
+              "type": "string",
+              "value": "\"The-Stealth-Warrior\"",
+              "text": "\"The-Stealth-Warrior\"",
+              "offset": 455,
+              "lineBreaks": 0,
+              "line": 20,
+              "col": 44
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "function_call",
+      "fun_name": {
+        "type": "identifier",
+        "value": "print",
+        "text": "print",
+        "offset": 479,
+        "lineBreaks": 0,
+        "line": 21,
+        "col": 1
+      },
+      "parameters": [
+        {
+          "type": "string",
+          "value": "\"A-B-C =>\"",
+          "text": "\"A-B-C =>\"",
+          "offset": 485,
+          "lineBreaks": 0,
+          "line": 21,
+          "col": 7
+        },
+        {
+          "type": "function_call",
+          "fun_name": {
+            "type": "identifier",
+            "value": "toCamelCase",
+            "text": "toCamelCase",
+            "offset": 496,
+            "lineBreaks": 0,
+            "line": 21,
+            "col": 18
+          },
+          "parameters": [
+            {
+              "type": "string",
+              "value": "\"ABC\"",
+              "text": "\"ABC\"",
+              "offset": 508,
+              "lineBreaks": 0,
+              "line": 21,
+              "col": 30
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

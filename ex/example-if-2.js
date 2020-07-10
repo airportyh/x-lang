@@ -1,3 +1,13 @@
+let n = 50;
+if (gt(n, 21)) {
+	if (gt(n, 42)) {
+		print("You are old");
+	} else {
+		print("You a young adult");
+	};
+} else {
+	print("You are still an child");
+};
 /*
 Runtime functions:
 */
@@ -46,32 +56,12 @@ function eq(one, other) {
     return one === other;
 }
 
-function concat(...args) {
-    return args.reduce((sum, num) => sum + num, "");
-}
-
 function split(str, separator) {
     return str.split(separator);
 }
 
-function join(arr, separator) {
-    return arr.join(separator);
-}
-
 function at(arr, index) {
     return arr[index];
-}
-
-function substring(string, start, end) {
-    return string.substring(start, end);
-}
-
-function toUpperCase(string) {
-    return string.toUpperCase();
-}
-
-function toLowerCase(string) {
-    return string.toLowerCase();
 }
 
 function each(arr, fun) {
@@ -108,12 +98,4 @@ function size(setOrMap) {
 
 function length(arr) {
     return arr.length;
-}
-
-function $if(cond, consequent, alternate) {
-    if (cond) {
-        return consequent();
-    } else {
-        return alternate();
-    }
 }
